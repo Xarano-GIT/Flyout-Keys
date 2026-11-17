@@ -11,7 +11,7 @@
 #
 ## Title: Flyout Keys
 ## Notes: Binds spell flyouts with keys 1 through 0 automatically
-## Version: 20261117
+## Version: 20261117-1
 ## Author: Xarano
 ## Category: User Interface
 ## IconTexture: Interface\Icons\inv_misc_number_1

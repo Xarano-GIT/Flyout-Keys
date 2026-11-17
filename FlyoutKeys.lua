@@ -4,6 +4,8 @@ end
 
 local MAX_KEYS = 10
 local PROXY_NAME = "FlyoutKeysProxy"
+local WARNING =
+    "|cffffd100FlyoutKeys:|r Flyout Keys isn't warmed up yet, so flyout keybinds won't work until you leave combat. Open your largest flyout with the most spells once out of combat after logging in to avoid this."
 
 local function KeyFor(i)
     return i < 10 and tostring(i) or "0"
@@ -90,6 +92,10 @@ binder:SetAttribute("_bind", [[
     end
 ]])
 
+local function Rebind()
+    SecureHandlerExecute(binder, binder:GetAttribute("_bind"))
+end
+
 SecureHandlerWrapScript(SpellFlyout, "OnShow", binder, [[ owner:RunAttribute("_bind") ]])
 SecureHandlerWrapScript(SpellFlyout, "OnHide", binder, [[ owner:ClearBindings() ]])
 
@@ -115,23 +121,53 @@ local function GetSortedButtons()
     return list
 end
 
+local function UpdateLabels()
+    for i, button in ipairs(GetSortedButtons()) do
+        if button.HotKey then
+            if i <= MAX_KEYS and proxies[button] then
+                button.HotKey:SetText(KeyFor(i))
+                button.HotKey:Show()
+            else
+                button.HotKey:SetText("")
+            end
+        end
+    end
+end
+
+local warnedThisCombat = false
+
+local function HasUnlinkedButtons()
+    for _, button in ipairs({SpellFlyout:GetChildren()}) do
+        if button:IsShown() and button:IsObjectType("Button") and not proxies[button] then
+            return true
+        end
+    end
+    return false
+end
+
 SpellFlyout:HookScript("OnShow", function()
-    if RegisterFlyoutButtons() then
-        SecureHandlerExecute(binder, binder:GetAttribute("_bind"))
+    if InCombatLockdown() then
+        if not warnedThisCombat and HasUnlinkedButtons() then
+            warnedThisCombat = true
+            print(WARNING)
+        end
+    elseif RegisterFlyoutButtons() then
+        Rebind()
     end
 
-    for i, button in ipairs(GetSortedButtons()) do
-        if i > MAX_KEYS then
-            break
-        end
-        if button.HotKey then
-            button.HotKey:SetText(KeyFor(i))
-            button.HotKey:Show()
-        end
-    end
+    UpdateLabels()
 end)
 
 local events = CreateFrame("Frame")
 events:RegisterEvent("PLAYER_LOGIN")
 events:RegisterEvent("PLAYER_REGEN_ENABLED")
-events:SetScript("OnEvent", RegisterFlyoutButtons)
+events:SetScript("OnEvent", function(_, event)
+    if event == "PLAYER_REGEN_ENABLED" then
+        warnedThisCombat = false
+    end
+
+    if RegisterFlyoutButtons() and SpellFlyout:IsShown() then
+        Rebind()
+        UpdateLabels()
+    end
+end)

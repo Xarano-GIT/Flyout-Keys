@@ -6,6 +6,10 @@ When a flyout is opened from a hotbar, the spells inside will have hotkeys assig
 
 This addon has no configuration and is simply plug and play!
 
+### **Note:**
+
+Due to Blizzard restrictions, Flyout Keys requires a "warmup" by opening a flyout once before combat starts.
+
 * * *
 
 ![](https://img.shields.io/badge/Supports-Midnight-purple?style=flat&logo=battledotnet&logoColor=purple)
