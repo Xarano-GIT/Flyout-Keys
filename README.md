@@ -1,6 +1,10 @@
 ### **Info:**
 
-Automatically adds keybinds 1 through 0 to any flyout when opened!
+Flyout Keys is a simple addon that enhances action bar flyouts with number row keybinds automatically!
+
+When a flyout is opened from a hotbar, the spells inside will have hotkeys assigned to them, starting with 1 and incrementing across the number row until 0, giving you as total of 10 hotkey-able spells.
+
+This addon has no configuration and is simply plug and play!
 
 * * *
 
