@@ -1,0 +1,22 @@
+## Interface: 120107, 120105, 50504, 40402, 30405, 38002, 20506, 16001, 11509
+#
+# Mainline: 120107 (PTR), 120105 (Live)
+# Mists: 50504 (Live)
+# Cata: 40402 (Live)
+# Wrath: 30405 (Live)
+# Wrath (Titan): 38002 (Live China)
+# TBC: 20506 (Live)
+# Forever: 16001 (Live)
+# Vanilla: 11509 (Live)
+#
+## Title: Flyout Keys
+## Notes: Binds spell flyouts with keys 1 through 0 automatically
+## Version: 20261116
+## Author: Xarano
+## Category: User Interface
+## IconTexture: Interface\Icons\inv_misc_number_1
+## X-Curse-Project-ID: 1811207
+## X-WoWI-ID: 27311
+## X-Wago-ID: aND9726o
+
+FlyoutKeys.lua
