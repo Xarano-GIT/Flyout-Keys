@@ -11,10 +11,10 @@
 #
 ## Title: Flyout Keys
 ## Notes: Binds spell flyouts with keys 1 through 0 automatically
-## Version: 20261117-1
+## Version: 20261117-2
 ## Author: Xarano
 ## Category: User Interface
-## IconTexture: Interface\Icons\inv_misc_number_1
+## IconTexture: Interface\Icons\inv_misc_key_12
 ## X-Curse-Project-ID: 1811207
 ## X-WoWI-ID: 27311
 ## X-Wago-ID: aND9726o
